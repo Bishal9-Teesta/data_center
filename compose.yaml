@@ -1,0 +1,24 @@
+
+version: '3'
+services:
+  Zookeeper:
+    image: confluentinc/cp-zookeeper
+    hostname: zookeeper
+    container_name: Data_Center-Zookeeper
+    ports:
+      - 2181:2181
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  Kafka:
+    image: confluentinc/cp-kafka
+    container_name: Data_Center-Kafka
+    ports:
+      - 9092:9092
+    depends_on:
+      - Zookeeper
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
