@@ -1,7 +1,10 @@
 
 const { kafka_instance } = require("../config")
 
-const topics = process.env?.KAFKA_TOPIC?.toString().trim().split(" ") || []
+const future_topics = process.env?.KAFKA_FUTURE_TOPIC?.toString().trim().split(" ") || []
+const option_topics = process.env?.KAFKA_OPTION_TOPIC?.toString().trim().split(" ") || []
+
+const topics = [...future_topics, ...option_topics]
 
 const create_topic = async () => {
     try {

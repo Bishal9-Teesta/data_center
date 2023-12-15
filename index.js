@@ -10,11 +10,13 @@ const binance_future_socket = require("./binance/future")
 const bybit_future_socket = require("./bybit/future")
 const delta_future_socket = require("./delta/future")
 const deribit_future_socket = require("./deribit/future")
+const deribit_option_socket = require("./deribit/option")
 const okx_future_socket = require("./okx/future")
 
 const main = async () => {
     global.APP_EVENTS = new EventEmitter()
     console.log("process.env.KAFKA_CLIENT_ID:- ", process.env.KAFKA_CLIENT_ID)
+    // console.log("process.env.KAFKA_OPTION_CLIENT_ID:- ", process.env.KAFKA_OPTION_CLIENT_ID)
     await create_topic()
     await kafka_producer()
 
@@ -23,5 +25,6 @@ const main = async () => {
     delta_future_socket()
     deribit_future_socket()
     okx_future_socket()
+    deribit_option_socket()
 }
 main()
